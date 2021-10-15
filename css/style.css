@@ -1,0 +1,77 @@
+body{
+    background-image: url(../images/fondo.jpg);
+    margin: 0;
+}
+
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+nav ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-inline-start: 0%;
+}
+
+nav ul li{
+    list-style: none;
+    padding-left: 15px;
+     padding-right: 15px;
+    text-shadow: 2px 2px rgb(200,173,127);
+    background-color: rgb(243,229,171);
+    border-radius: 20px;
+    border-style: solid;
+    border-top-color: rgb(187, 151, 104);
+    border-left-color: rgb(187, 151, 104);
+    border-right-color: rgb(129, 107, 68);
+    border-bottom-color: rgb(129, 107, 68);
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: black;
+}
+
+.nombreCat{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.descCat{
+    text-align: center;
+
+}
+
+.volver{
+    color: black;
+    margin-left: 10%;
+}
+
+.tabla{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 30px;
+}
+
+th, td{
+    margin: 5%;
+}
+
+.error{
+    text-align: center;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}

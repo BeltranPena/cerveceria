@@ -1,7 +1,7 @@
 <?php
 
-require_once("beerController.php");
-require_once("beerView.php");
+require_once("Controller/beerController.php");
+require_once("View/beerView.php");
 
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
@@ -23,6 +23,21 @@ switch($params[0]){
         break;
     case 'tipos':
         $controller->showBeerByID($params[1]);
+        break;
+    case 'createBeer':
+        $controller->createBeer();
+        break;
+    case 'deleteBeer':
+        $controller->deleteBeer($params[1]);
+        break;
+    case 'updateBeer':
+        $controller->updateBeer();
+        break;
+    case 'createUser':
+        $controller->createUser();
+        break;
+    case 'login':
+        //$controller->login();
         break;
     default:
         echo('404 Page not found');
