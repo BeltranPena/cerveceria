@@ -1,6 +1,7 @@
 body{
     background-image: url(../images/fondo.jpg);
     margin: 0;
+    font-family: 'Cinzel', serif;
 }
 
 .logo{
@@ -10,30 +11,41 @@ body{
     width: 100%;
   }
 
-nav ul{
+nav{
+    background-image: url(../images/marron-oscuro.jpg);
+    background-size: contain;
     display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-top: -24px;
+    margin-bottom:50px;
+}
+
+nav div ul{
+    display: flex;
+    justify-content:flex-start;
     flex-direction: row;
-    justify-content: space-around;
     padding-inline-start: 0%;
+    margin: 0;
 }
 
 nav ul li{
     list-style: none;
-    padding-left: 15px;
-     padding-right: 15px;
-    text-shadow: 2px 2px rgb(200,173,127);
-    background-color: rgb(243,229,171);
+    margin-left: 30px;
+    margin-right: 30px;
+    text-shadow: 2px 2px black;
+    /*background-color: rgb(243,229,171);
     border-radius: 20px;
     border-style: solid;
     border-top-color: rgb(187, 151, 104);
     border-left-color: rgb(187, 151, 104);
     border-right-color: rgb(129, 107, 68);
-    border-bottom-color: rgb(129, 107, 68);
+    border-bottom-color: rgb(129, 107, 68);*/
 }
 
 nav ul li a{
     text-decoration: none;
-    color: black;
+    color: rgb(182, 145, 80);
 }
 
 .nombreCat{
@@ -54,8 +66,9 @@ nav ul li a{
 .tabla{
     margin-left: auto;
     margin-right: auto;
+    width: 70%;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 th, td{
@@ -74,4 +87,12 @@ th, td{
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
+}
+
+.icon{
+    height: 20px;
+}
+
+td a{
+    color: black;
 }

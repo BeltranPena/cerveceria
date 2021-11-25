@@ -1,22 +1,19 @@
 <table class="tabla">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Nombre</th>
             <th>Descripcion</th>
-            <th>IBU</th>
-            <th>Alcohol</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tableBody">
         {foreach from=$beers item=$beer}
             <tr>
-                <td>{$beer->id_cerveza}</td>
-                <td>{$beer->nombre}</td>
+                <td><a href="beerInfo/{$beer->id_cerveza}">{$beer->nombre}</a></td>
                 <td>{$beer->resumen}</td>
-                <td>{$beer->ibu}</td>
-                <td>{$beer->alcohol}</td>
-                <td><a href="deleteBeer/{$beer->id_cerveza}">Borrar</a></td>
+                {if $rol == 2}
+                    <td><a href="deleteBeer/{$beer->id_cerveza}"><img class="icon" src="images/goma.png"></td>
+                    <td><a href="updateBeer/{$beer->id_cerveza}"><img class="icon" src="images/edit.png"></td>
+                {/if}
             </tr>
         {/foreach}
     </tbody>

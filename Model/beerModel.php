@@ -2,7 +2,7 @@
 
 
 
-class Model{
+class beerModel{
 
 	private $db;
     function __construct(){
@@ -34,11 +34,17 @@ class Model{
 		$sentencia->execute(array($params));
 	}
 
-	function updateBeerFromDB($id,$nombre, $resumen, $ibu, $alcohol, $id_tipo){
-		$sentencia = $this->db->prepare("UPDATE cerveza SET nombre=$nombre, resumen=$resumen, ibu=$ibu, alcohol=$alcohol, id_tipo=$id_tipo WHERE id_cerveza = $id");
-		$sentencia->execute(array($id,$nombre, $resumen, $ibu, $alcohol, $id_tipo));
+	function updateBeerFromDB($nombre, $resumen, $ibu, $alcohol, $id_tipo, $id){
+		$sentencia = $this->db->prepare("UPDATE cerveza SET nombre=?, resumen=?, ibu=?, alcohol=?, id_tipo=? WHERE id_cerveza = ?");
+		$sentencia->execute(array($nombre, $resumen, $ibu, $alcohol, $id_tipo, $id));
 	}
 
+	function getBeer($id_cerveza){
+		$sentencia = $this->db->prepare('SELECT * FROM cerveza WHERE id_cerveza = ?');
+		$sentencia->execute(array($id_cerveza));
+		$beerInfo = $sentencia->fetch(PDO::FETCH_OBJ);
+		return $beerInfo;
+	}
 
 	function getNombreCategoria($id_tipo){
 		$sentencia = $this->db->prepare('SELECT tipo_cerveza.tipo,tipo_cerveza.descripcion FROM cerveza JOIN tipo_cerveza ON cerveza.id_tipo = tipo_cerveza.id_tipo WHERE tipo_cerveza.id_tipo = ?');
@@ -47,17 +53,6 @@ class Model{
 		return $nombreCat;
 	}
 
-	function insertUser($username, $password){
-		$sentencia = $this->db->prepare("INSERT INTO usuarios(usuario, contraseña) VALUES(?, ?)");
-        $sentencia->execute(array($username,$password));
-	}
-
-	function checkUser($password){
-		$sentencia = $this->db->prepare('SELECT * FROM usuarios WHERE contraseña = ?');
-		$sentencia->execute([$password]);
-		$userPass = $sentencia->fetchAll(PDO::FETCH_OBJ);
-		return $userPass;
-	}
 
 
 }

@@ -2,35 +2,54 @@
 
 require_once "Model/beerModel.php";
 require_once "View/beerView.php";
+require_once "helpers/helper.php";
 
-class Controller{
+class beerController{
 	private $model;
 	private $view;
+	private $helper;
 
 	public function __Construct(){
-		$this->model = new Model();
-		$this->view = new View();
+		$this->model = new beerModel();
+		$this->view = new beerView();
+		$this->helper = new Helper();
 	}
 
 	public function showHome(){
-		$this->view->home();
+		$rol = $this->helper->getRol();
 		$allBeers = $this->model->getAllBeers();
-		$this->view->renderAll($allBeers);
+		$this->view->home($allBeers, $rol);
 	}
 
 	public function createBeer(){
-		$this->model->insertBeer($_POST['nombre'],$_POST['resumen'],$_POST['ibu'],$_POST['alcohol'],$_POST['id_tipo']);
+		if(isset($_POST['nombre']) && isset($_POST['resumen']) && isset($_POST['ibu']) && isset($_POST['alcohol']) && isset($_POST['id_tipo']) & isset($params)){
+			$this->model->insertBeer($_POST['nombre'],$_POST['resumen'],$_POST['ibu'],$_POST['alcohol'],$_POST['id_tipo']);
+		}
 		header("Location: ".BASE_URL."home");
 	}
 
 	public function deleteBeer($params){
-		$this->model->deleteBeerFromDB($params);
+		if(isset($params)){
+			$this->model->deleteBeerFromDB($params);
+		}
 		header("Location: ".BASE_URL."home");
 	}
 
-	public function updateBeer(){
-		$this->model->updateBeerFromDB($_POST['id_cerveza'],$_POST['nombre'],$_POST['resumen'],$_POST['ibu'],$_POST['alcohol'],$_POST['id_tipo']);
+	public function updateBeer($params){
+		$this->view->renderUpdate($params);
+	}
+
+	public function changeBeer($params){
+		if(isset($_POST['nombre']) && isset($_POST['resumen']) && isset($_POST['ibu']) && isset($_POST['alcohol']) && isset($_POST['id_tipo']) & isset($params)){
+			$this->model->updateBeerFromDB($_POST['nombre'],$_POST['resumen'],$_POST['ibu'],$_POST['alcohol'],$_POST['id_tipo'], $params);
+		}
 		header("Location: ".BASE_URL."home");
+	}
+
+	public function infoBeer($params){
+		$beerInfo = $this->model->getBeer($params);
+		$rol = $this->helper->getRol();
+		$this->view->renderBeerInfo($beerInfo, $rol);
 	}
 
 	public function showBeerByID($params){
@@ -45,28 +64,7 @@ class Controller{
 
 		$beer = $this->model->getBeerByID($params);
 		//muestra elementos en vista
-		$this->view->renderBeerByID($nombreCat,$beer);
+		$rol = $this->helper->getRol();
+		$this->view->renderBeerByID($nombreCat,$beer, $rol);
 	}
-
-	public function createUser(){
-			$username = $_POST['usuario'];
-			$password = password_hash($_POST['contraseña'], PASSWORD_BCRYPT);
-			echo $username;
-			echo $password;
-			$this->model->insertUser($username,$password);
-			header("Location: ".BASE_URL);
-	}
-
-	//public function login(){
-	//	if ((!empty($_POST['usuario']))&& (!empty($_POST['contraseña'])){
-	//		$username = $_POST['usuario'];
-	//		$password = $_POST['contraseña'];
-	//		$user = $this->model->checkUser($password);
-	//		if($user && password_verify($password, ($user->password)){
-
-	//		}
-	//	}
-	//}
-
-
 }
